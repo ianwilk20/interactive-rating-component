@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="index.css">
+  
+  <title>Frontend Mentor | Interactive rating component</title>
+</head>
+<body>
+
+  <!-- Rating state start -->
+  <section id="rating-card" class="rating-card-start">
+    <div class="rating-star"> 
+    <img alt="Star icon" src="../assets/images/icon-star.svg" />
+    </div>
+    <h1>How did we do?</h1>
+    <p class="rating-card">Please let us know how we did with your support request. All feedback is appreciated 
+      to help us improve our offering!</p>
+    <section class="button-rating-group">    
+      <button class="rating-button" id="1" onclick="onRatingClick(1)">1</button>
+      <button class="rating-button" id="2" onclick="onRatingClick(2)">2</button>
+      <button class="rating-button" id="3" onclick="onRatingClick(3)">3</button>
+      <button class="rating-button" id="4" onclick="onRatingClick(4)">4</button>
+      <button class="rating-button" id="5" onclick="onRatingClick(5)">5</button>
+    </section>
+    <button class="submit-button" onclick="onSubmit()">SUBMIT</button>
+  </section>
+
+  <!-- Rating state end -->
+  <section id="thank-you-card" class="thank-you-card">
+    <div class="thank-you-icon"> 
+      <img alt="Illustration of a phone" src="../assets/images/illustration-thank-you.svg" />
+    </div>
+    <div class="thank-you-pill-cntr">
+      <p id="thank-you-rating-pill"></p>
+    </div>
+    <h1 class="thank-you-head">Thank you!</h1>
+    <p class="thank-you-text">We appreciate you taking the time to give a rating. If you ever need more support, 
+      don’t hesitate to get in touch!</p>
+  </section>
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://github.com/ianwilk20">Ian Wilkinson</a>.
+  </div>
+
+</body>
+
+<script>
+
+
+  function onRatingClick(rtng) {
+    let prevRtng;
+    if (localStorage.getItem('rating')) {
+      prevRtng = localStorage.getItem('rating');
+      document.getElementById(prevRtng).style.backgroundColor = ""
+      document.getElementById(prevRtng).style.color = ""
+    }
+    document.getElementById(rtng).style.backgroundColor = "rgb(124,136,150)"
+    document.getElementById(rtng).style.color = "rgb(249,255,255)"
+    localStorage.setItem('rating', rtng);
+  }
+
+  function onSubmit() {
+    let prevRtng;
+    if (localStorage.getItem('rating')) {
+      console.log("onSubmit hiding elem")
+      prevRtng = localStorage.getItem('rating');
+      document.getElementById("rating-card").style.display = "none"
+      document.getElementById("thank-you-card").style.display = "flex"
+      document.getElementById("thank-you-rating-pill").innerHTML = "You selected " + prevRtng + " out of 5"
+
+    } else {
+      alert("Error: Please select a rating then submit your rating")
+    }
+  }
+</script>
+</html>
